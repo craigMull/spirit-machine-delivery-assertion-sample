@@ -1,0 +1,9 @@
+[project]
+name = "spirit-machine-delivery-assertion-sample"
+version = "0.1.0"
+description = "Sample: read a delivery ledger honestly, and assert delivery by reading a receipt back from the transport's durable record."
+requires-python = ">=3.9"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

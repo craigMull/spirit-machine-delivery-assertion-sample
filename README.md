@@ -36,7 +36,7 @@ python3 ledger_reconcile.py             # classify the fixture, block format
 python3 ledger_reconcile.py --format json
 python3 assert_delivery.py --demo all   # 5 targets, 3 deliberately broken -> exit 1
 python3 assert_delivery.py --demo ok    # the good target only -> exit 0
-pytest -q                               # 9 tests, all pass
+pytest -q                               # 11 tests, all pass
 ```
 
 Run the classifier against a real ledger (read-only; never committed):

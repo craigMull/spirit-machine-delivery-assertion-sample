@@ -33,10 +33,18 @@ def test_compound_row_counted_once():
     assert cls == "transport_dead"
 
 
+def test_timed_out_is_transport_dead():
+    # F2 (2026-10-20): 'Timed out' is a send failure, not a routing note — the
+    # message never left. It belongs in transport_dead alongside the DNS shape.
+    assert classify("failed",
+                    "delivery error: Telegram send failed: Timed out (target telegram:x)"
+                    ) == "transport_dead"
+
+
 def test_new_error_shape_is_unclassified_not_folded():
     # a shape the rules don't know must surface, not be rounded into "failed"
     assert classify("failed",
-                    "delivery error: Telegram send failed: Timed out (target telegram:x)"
+                    "delivery error: Telegram send failed: HTTP 429 rate limited (target telegram:x)"
                     ) == "unclassified"
 
 

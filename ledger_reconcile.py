@@ -13,6 +13,7 @@ once, never twice):
   delivered              status == 'delivered' and error empty
   sent_then_mislabelled  'delivered without thread_id' in error   (sent, labelled failed)
   transport_dead         'Temporary failure in name resolution' in error (never sent)
+                          or 'Timed out' in error                 (send failed — never sent)
   target_invalid         'Chat not found' in error                (never sent)
   unclassified           anything else — printed, never folded in
 
@@ -39,6 +40,8 @@ def classify(status, error):
     if "delivered without thread_id" in error:
         return "sent_then_mislabelled"
     if "Temporary failure in name resolution" in error:
+        return "transport_dead"
+    if "Timed out" in error:
         return "transport_dead"
     if "Chat not found" in error:
         return "target_invalid"
